@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+<rect width="900" height="620" fill="#f2c600"/><circle cx="730" cy="95" r="150" fill="#ffd92c"/>
+<path d="M0 500h900v120H0z" fill="#151619"/><path d="M0 530h900" stroke="#fff" stroke-width="10" stroke-dasharray="55 42" opacity=".8"/>
+<g transform="translate(120 190)"><rect x="0" y="85" width="390" height="190" rx="24" fill="#fff"/><rect x="390" y="130" width="180" height="145" rx="24" fill="#fff"/><path d="M425 130h95l52 80H425z" fill="#17181b"/><rect x="38" y="118" width="260" height="86" rx="12" fill="#f7f4eb"/>
+<circle cx="118" cy="290" r="46" fill="#17181b"/><circle cx="118" cy="290" r="19" fill="#f2c600"/><circle cx="462" cy="290" r="46" fill="#17181b"/><circle cx="462" cy="290" r="19" fill="#f2c600"/>
+<text x="60" y="173" font-family="Arial,sans-serif" font-weight="900" font-size="38" fill="#17181b">SIR KABS</text><text x="60" y="214" font-family="Arial,sans-serif" font-weight="800" font-size="23" fill="#7b6500">TRUCK HIRE</text></g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#151515"/><stop offset="1" stop-color="#39320c"/></linearGradient></defs>
+  <rect width="900" height="1100" fill="url(#g)"/>
+  <circle cx="450" cy="385" r="160" fill="#f2c600" opacity=".95"/>
+  <path d="M205 945c20-215 125-330 245-330s225 115 245 330" fill="#f2c600" opacity=".95"/>
+  <text x="450" y="1010" fill="#fff" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700">ADD OWNER PHOTO</text>
+  <text x="450" y="1060" fill="#ccc" text-anchor="middle" font-family="Arial, sans-serif" font-size="26">assets/owners/owner-1.jpg / owner-2.jpg</text>
+</svg>

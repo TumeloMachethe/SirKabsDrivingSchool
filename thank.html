@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#111111"/>
+  <meta name="description" content="Thank you for your Sir Kabs Driving School booking request. We will contact you to confirm your booking and discuss payment arrangements."/>
+  <title>Thank You | Sir Kabs Driving School</title>
+  <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="style.css" rel="stylesheet"/>
+  <style>
+    .thank-page {
+      min-height: calc(100vh - 150px);
+      display: grid;
+      place-items: center;
+      padding: clamp(70px, 9vw, 120px) 0;
+      background:
+        radial-gradient(circle at 88% 18%, rgba(242,198,0,.20), transparent 28%),
+        radial-gradient(circle at 8% 88%, rgba(242,198,0,.10), transparent 25%),
+        var(--ink);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .thank-page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,.02), transparent 45%);
+      pointer-events: none;
+    }
+    .thank-wrap {
+      position: relative;
+      z-index: 1;
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .thank-card {
+      background: rgba(27,28,32,.94);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 30px;
+      padding: clamp(28px, 5vw, 58px);
+      box-shadow: 0 35px 100px rgba(0,0,0,.36);
+      backdrop-filter: blur(8px);
+      /* entrance for the whole card */
+      animation: cardRise .7s cubic-bezier(.22,.9,.32,1) both;
+    }
+    .thank-icon {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      color: #111;
+      font-size: 34px;
+      font-weight: 950;
+      box-shadow: 0 14px 40px rgba(242,198,0,.22);
+      margin-bottom: 28px;
+      position: relative;
+      animation: iconPop .65s cubic-bezier(.34,1.56,.64,1) .15s both;
+    }
+    /* pulsing ring behind the checkmark */
+    .thank-icon::after {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 2px solid var(--yellow);
+      opacity: 0;
+      animation: ringPulse 1.5s ease-out .55s 2;
+    }
+    .thank-icon-mark { position: relative; z-index: 1; display: block; animation: markSettle .5s ease .55s both; }
+
+    /* tiny confetti burst around the icon */
+    .confetti {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 10px;
+      border-radius: 2px;
+      opacity: 0;
+      pointer-events: none;
+      animation: confettiBurst 1s ease-out forwards;
+    }
+    .confetti.c1 { background: #ffffff; --tx: -68px; --ty: -58px; --rot: 130deg; animation-delay: .55s; }
+    .confetti.c2 { background: #25d366; --tx: 62px;  --ty: -66px; --rot: -140deg; animation-delay: .6s; }
+    .confetti.c3 { background: #ffd628; --tx: -46px; --ty: 66px;  --rot: 200deg; animation-delay: .65s; }
+    .confetti.c4 { background: #ffffff; --tx: 78px;  --ty: 38px;  --rot: -90deg; animation-delay: .7s; }
+    .confetti.c5 { background: #f2c600; --tx: -84px; --ty: 8px;   --rot: 160deg; animation-delay: .5s; }
+    .confetti.c6 { background: #25d366; --tx: 26px;  --ty: -86px; --rot: -60deg; animation-delay: .75s; }
+
+    .thank-card .eyebrow { margin-bottom: 10px; animation: fadeUp .55s ease .35s both; }
+    .thank-card h1 {
+      color: #fff;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: .92;
+      letter-spacing: -.06em;
+      margin: 0 0 22px;
+      max-width: 760px;
+      animation: fadeUp .55s ease .42s both;
+    }
+    .thank-card h1 em { color: var(--yellow); font-style: normal; }
+    .thank-lead {
+      color: #c4c5ca;
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.7;
+      max-width: 760px;
+      margin-bottom: 32px;
+      animation: fadeUp .55s ease .5s both;
+    }
+    .thank-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+    .thank-step {
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.035);
+      border-radius: 18px;
+      padding: 20px;
+      min-height: 150px;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+      animation: fadeUp .55s ease both;
+    }
+    .thank-step:hover {
+      transform: translateY(-4px);
+      border-color: rgba(242,198,0,.4);
+      background: rgba(255,255,255,.055);
+    }
+    .thank-step:nth-child(1) { animation-delay: .58s; }
+    .thank-step:nth-child(2) { animation-delay: .66s; }
+    .thank-step:nth-child(3) { animation-delay: .74s; }
+    .thank-step b {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #111;
+      font-size: 11px;
+      margin-bottom: 20px;
+    }
+    .thank-step strong { display: block; font-size: 16px; margin-bottom: 8px; }
+    .thank-step span { color: #9fa1a8; font-size: 12px; line-height: 1.6; }
+    .payment-note {
+      border-left: 4px solid var(--yellow);
+      background: rgba(242,198,0,.08);
+      border-radius: 0 16px 16px 0;
+      padding: 18px 20px;
+      color: #d7d8dc;
+      font-size: 13px;
+      line-height: 1.65;
+      margin: 30px 0;
+      animation: fadeUp .55s ease .85s both;
+    }
+    .payment-note strong { color: var(--yellow); }
+    .thank-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+      animation: fadeUp .55s ease .95s both;
+    }
+    .thank-actions .btn { min-width: 190px; }
+
+    @keyframes cardRise {
+      from { opacity: 0; transform: translateY(26px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes iconPop {
+      0%   { opacity: 0; transform: scale(0) rotate(-20deg); }
+      60%  { opacity: 1; transform: scale(1.15) rotate(6deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    @keyframes markSettle {
+      from { opacity: 0; transform: scale(.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes ringPulse {
+      0%   { opacity: .6; transform: scale(.8); }
+      100% { opacity: 0; transform: scale(1.65); }
+    }
+    @keyframes confettiBurst {
+      0%   { opacity: 1; transform: translate(-50%,-50%) translate(0,0) rotate(0deg); }
+      100% { opacity: 0; transform: translate(-50%,-50%) translate(var(--tx), var(--ty)) rotate(var(--rot)); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 760px) {
+      .thank-steps { grid-template-columns: 1fr; }
+      .thank-step { min-height: auto; }
+      .thank-actions { display: grid; }
+      .thank-actions .btn { width: 100%; }
+      .thank-card { border-radius: 24px; }
+    }
+
+    /* Respect reduced-motion: show everything immediately, no motion */
+    @media (prefers-reduced-motion: reduce) {
+      .thank-card,
+      .thank-icon,
+      .thank-icon::after,
+      .thank-icon-mark,
+      .confetti,
+      .thank-card .eyebrow,
+      .thank-card h1,
+      .thank-lead,
+      .thank-step,
+      .payment-note,
+      .thank-actions {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .confetti { display: none; }
+    }
+  </style>
+  <noscript><style>body{overflow:auto!important}.site-loader{display:none!important}.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body data-page="thank-you">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Sir Kabs Driving School home">
+        <span class="brand-mark">SK</span>
+        <span class="brand-copy"><strong>Sir Kabs</strong><small>Driving School</small></span>
+      </a>
+      <a class="btn btn-sm btn-primary" href="index.html">Back Home</a>
+    </div>
+  </header>
+
+  <main id="main" class="thank-page">
+    <div class="thank-wrap">
+      <section class="thank-card">
+        <div class="thank-icon" aria-hidden="true">
+          <span class="thank-icon-mark">✓</span>
+          <span class="confetti c1"></span>
+          <span class="confetti c2"></span>
+          <span class="confetti c3"></span>
+          <span class="confetti c4"></span>
+          <span class="confetti c5"></span>
+          <span class="confetti c6"></span>
+        </div>
+        <span class="eyebrow">Booking request received</span>
+        <h1>Thank you.<br/><em>We’ll contact you soon.</em></h1>
+        <p class="thank-lead">Your booking request has been sent successfully. Sir Kabs Driving School will contact you to confirm the details, check availability and talk you through the available payment method before your booking is finalised.</p>
+
+        <div class="thank-steps" aria-label="What happens next">
+          <div class="thank-step"><b>01</b><strong>We review your request</strong><span>We check the service, date and information you submitted.</span></div>
+          <div class="thank-step"><b>02</b><strong>We contact you</strong><span>Sir Kabs will confirm availability and any final booking arrangements.</span></div>
+          <div class="thank-step"><b>03</b><strong>Payment is discussed</strong><span>We will explain the payment method and payment details directly with you.</span></div>
+        </div>
+
+        <div class="payment-note"><strong>Please note:</strong> wait until Sir Kabs Driving School contacts you and confirms the correct payment details before making any payment.</div>
+
+        <div class="thank-actions">
+          <a class="btn btn-primary" href="index.html">Return to Home →</a>
+          <a class="btn btn-whatsapp" href="https://wa.me/27780861628?text=Hi%20Sir%20Kabs%2C%20I%20have%20just%20submitted%20a%20booking%20request." target="_blank" rel="noopener"><img src="assets/whatsapp.svg" alt=""/> WhatsApp Sir Kabs</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> Sir Kabs Driving School.</span>
+      <span>Steer your future in confidence.</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

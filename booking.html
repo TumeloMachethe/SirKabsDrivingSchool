@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#111111" name="theme-color"/>
+<meta content="Book a Code 8, Code 10, driving lesson, car hire or truck hire with Sir Kabs Driving School." name="description"/>
+<title>Book a Lesson | Sir Kabs Driving School</title>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="style.css" rel="stylesheet"/>
+<noscript><style>body{overflow:auto!important}.site-loader{display:none!important}.reveal{opacity:1!important;transform:none!important}</style></noscript></head>
+<body class="is-loading" data-page="booking">
+<a class="skip-link" href="#main">Skip to content</a><div aria-hidden="true" class="site-loader" id="site-loader"><div class="loader-inner"><div class="loader-mark">SK</div><strong>Sir Kabs Driving School</strong><small>Steer your future</small><div class="loader-track"><span></span></div></div></div>
+<div class="topbar"><div class="container topbar-inner"><span>Qualified &amp; Certified • Code 8 &amp; Code 10</span><div class="topbar-links"><a href="tel:+27780861628">+27 78 086 1628</a><a class="top-whatsapp" href="https://wa.me/27780861628" rel="noopener" target="_blank"><img alt="" decoding="async" loading="lazy" src="assets/whatsapp.svg"/> WhatsApp</a></div></div></div>
+<header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">SK</span><span class="brand-copy"><strong>Sir Kabs</strong><small>Driving School</small></span></a><button aria-controls="main-nav" aria-expanded="false" aria-label="Open menu" class="menu-toggle"><span></span><span></span><span></span></button><nav class="main-nav" id="main-nav"><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="study.html">Study Hub</a><a href="success.html">Success Stories</a><a href="about.html">About Us</a><a aria-current="page" class="btn btn-sm btn-primary nav-cta" href="booking.html">Book Now</a></nav></div></header>
+<main id="main">
+<section class="booking-hero">
+<div class="container booking-grid">
+<aside class="booking-side reveal">
+<span class="eyebrow light">Book with Sir Kabs</span>
+<h1>Tell us what you need.<br/><em>We'll take it from there.</em></h1>
+<p>Complete the form and Sir Kabs will contact you to confirm the lesson, course or vehicle hire arrangement.</p>
+<div class="booking-note"><strong>What happens next?</strong><ol><li>Send your booking request.</li><li>Sir Kabs contacts you to confirm.</li><li>Your lesson or service is arranged.</li></ol></div>
+</aside>
+<div class="booking-panel reveal">
+<div class="booking-panel-head"><span>Online booking</span><h2>Start your request</h2><p>Fields marked * are required.</p></div>
+<div aria-label="Quick service selection" class="quick-service-row">
+<button data-pick-service="Code 8 Full Course" type="button">Code 8</button>
+<button data-pick-service="Code 10 Full Course" type="button">Code 10</button>
+<button data-pick-service="Driving Lesson" type="button">Lesson</button>
+<button data-pick-service="Car Hire" type="button">Car Hire</button>
+<button data-pick-service="Truck Hire" type="button">Truck Hire</button>
+<button data-pick-service="Custom Package" type="button">Custom</button>
+</div>
+<div class="booking-package-link"><span>Want to combine lessons + vehicle hire?</span><a href="courses.html#package-builder">Build your own package →</a></div>
+<div class="custom-package-summary" hidden="" id="custom-package-summary">
+<span>Your custom package</span>
+<strong id="custom-package-summary-text"></strong>
+<small id="custom-package-summary-total"></small>
+</div>
+<!-- ===========================================================
+               FORM DESTINATIONS
+               FormSubmit email + Make.com webhook are configured in script.js.
+               Look for the bright comment block marked "EDIT HERE" at the
+               very top of script.js.
+               =========================================================== -->
+<form class="booking-form" id="booking-form" novalidate="">
+<input autocomplete="off" class="honeypot" name="website" tabindex="-1" type="text"/>
+<input id="custom-plan-field" name="custom_plan" type="hidden" value=""/>
+<input id="custom-total-field" name="custom_total" type="hidden" value=""/>
+<div class="form-grid two">
+<label>Full name <span>*</span><input name="full_name" placeholder="Your full name" required="" type="text"/></label>
+<label>WhatsApp / mobile <span>*</span><input name="phone" placeholder="e.g. 078 086 1628" required="" type="tel"/></label>
+</div>
+<div class="form-grid two">
+<label>Email<input name="email" placeholder="you@example.com" type="email"/></label>
+<label>Service <span>*</span>
+<select id="service-select" name="service" required="">
+<option value="">Choose a service</option>
+<option value="Code 8 Full Course">Code 8 Full Course — R6,000</option>
+<option value="Code 10 Full Course">Code 10 Full Course — R7,000</option>
+<option value="Driving Lesson">Driving Lesson — R250 p/h</option>
+<option value="Car Hire">Car Hire — R500</option>
+<option value="Truck Hire">Truck Hire — R650</option>
+<option value="Learner Support">Learner / Study Support</option>
+<option value="Custom Package">Custom Package</option>
+<option value="Other">Other</option>
+</select>
+</label>
+</div>
+<div class="form-grid two">
+<label>Preferred date<input id="preferred-date" name="preferred_date" type="date"/></label>
+<label>Preferred time<select name="preferred_time"><option value="">Choose a time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+</div>
+<div class="form-grid two">
+<label>Your driving experience<select name="experience"><option value="">Choose one</option><option>Complete beginner</option><option>Some driving experience</option><option>Preparing for my test</option><option>Refresher driver</option></select></label>
+<label>Learner's licence status<select name="learners_status"><option value="">Choose one</option><option>I have a learner's licence</option><option>I am preparing for my learner's licence</option><option>I need help with learner preparation</option><option>Not applicable</option></select></label>
+</div>
+<label>Where should we collect / meet you?<input name="pickup_area" placeholder="Area, suburb or meeting point" type="text"/></label>
+<label>Anything we should know?<textarea name="message" placeholder="Tell us about your test date, goals, availability or anything you want help with." rows="5"></textarea></label>
+<label class="consent"><input name="consent" required="" type="checkbox" value="Yes"/><span>I agree that Sir Kabs Driving School may contact me about this booking request. <b>*</b></span></label>
+<div aria-live="polite" class="form-status" id="form-status" role="status"></div>
+<button class="btn btn-primary full submit-btn" id="submit-btn" type="submit">Send booking request <span>→</span></button>
+<p class="form-footnote">Your request is sent to the Sir Kabs business email and, once configured, your Make.com webhook.</p>
+</form>
+</div>
+</div>
+</section>
+<section class="section soft-section"><div class="container"><div class="section-heading centered reveal"><span class="kicker">Prefer WhatsApp?</span><h2>Send a message instead.</h2><p>Tap the button below and tell us which service you need.</p></div><div class="whatsapp-center reveal"><a class="btn btn-whatsapp large" href="https://wa.me/27780861628?text=Hi%20Sir%20Kabs%20Driving%20School%2C%20I%20would%20like%20to%20book%20a%20lesson.%20My%20name%20is%20..." rel="noopener" target="_blank"><img alt="" decoding="async" loading="lazy" src="assets/whatsapp.svg"/> Message Sir Kabs on WhatsApp</a></div></div></section>
+</main>
+<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><a class="brand brand-light" href="index.html"><span class="brand-mark">SK</span><span class="brand-copy"><strong>Sir Kabs</strong><small>Driving School</small></span></a><p>Quality driver training for new and experienced learners.</p></div><div><h3>Explore</h3><a href="courses.html">Courses</a><a href="study.html">Study Hub</a><a href="success.html">Success Stories</a><a href="about.html">About Us</a></div><div><h3>Contact</h3><a href="tel:+27780861628">+27 78 086 1628</a><a href="mailto:mwmakabane@gmail.com">mwmakabane@gmail.com</a><a href="booking.html">Book a lesson</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> Sir Kabs Driving School.</span><span>Steer your future in confidence.</span></div></footer>
+<a aria-label="Chat on WhatsApp" class="whatsapp-float" href="https://wa.me/27780861628" rel="noopener" target="_blank"><img alt="" decoding="async" loading="lazy" src="assets/whatsapp.svg"/></a><div aria-live="polite" class="toast" id="toast" role="status"></div><script src="script.js"></script>
+</body>
+</html>

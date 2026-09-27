@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <rect width="900" height="900" fill="#ece8dc"/>
+  <circle cx="450" cy="345" r="135" fill="#171717" opacity=".14"/>
+  <path d="M220 760c30-185 125-285 230-285s200 100 230 285" fill="#171717" opacity=".14"/>
+  <rect x="255" y="75" width="390" height="105" rx="52" fill="#f2c600"/>
+  <text x="450" y="142" fill="#111" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="800">PASSED!</text>
+  <text x="450" y="830" fill="#555" text-anchor="middle" font-family="Arial, sans-serif" font-size="28">ADD STUDENT PHOTO</text>
+</svg>
