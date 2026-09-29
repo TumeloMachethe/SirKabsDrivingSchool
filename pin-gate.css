@@ -1,0 +1,16 @@
+/* PIN gate for Study Hub */
+.pin-overlay{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;padding:20px;background:rgba(8,9,10,.78);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.pin-overlay.show{opacity:1;visibility:visible}
+.pin-box{width:min(420px,100%);background:#fff;color:var(--ink);border-radius:26px;padding:32px 28px;text-align:center;box-shadow:0 35px 90px rgba(0,0,0,.35);transform:translateY(14px);transition:transform .25s ease}
+.pin-overlay.show .pin-box{transform:none}
+.pin-lock{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);font-size:26px}
+.pin-box h2{margin:0 0 6px;font-size:26px;letter-spacing:-.04em}
+.pin-box p{margin:0 0 20px;color:var(--muted);font-size:14px}
+.pin-box input{width:100%;text-align:center;letter-spacing:.35em;font-size:22px;font-weight:800;padding:14px;border:1px solid #dad7cf;border-radius:14px;background:#fbfaf7;outline:none}
+.pin-box input:focus{border-color:#b89a18;box-shadow:0 0 0 3px rgba(242,198,0,.2)}
+.pin-msg{min-height:20px;margin:10px 0 14px;color:var(--danger);font-size:13px;font-weight:700}
+.pin-actions{display:grid;gap:8px}
+.pin-cancel{background:none;border:0;color:var(--muted);font-weight:700;font-size:13px;padding:8px}
+.pin-box.shake{animation:pinShake .35s}
+@keyframes pinShake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.material-link.is-locked > .material-card-body > span::before{content:"🔒 "}
