@@ -23,7 +23,7 @@ SIR KABS DRIVING SCHOOL — QUICK EDIT GUIDE
    Add or replace images in index.html and success.html when needed.
 
 6) CUSTOM PACKAGE BUILDER
-   The calculator is in courses.html and prices are calculated below.
+   The calculator is in courses.html. Prices are in the PRICES object below.
 
 ==========================================================================
 */
@@ -31,6 +31,17 @@ const CONFIG = {
   formSubmitEmail: "sirkabsdrivingschool@gmail.com",
   makeWebhookUrl: "PASTE_YOUR_MAKE_WEBHOOK_URL_HERE", // <<< MAKE.COM: PASTE YOUR WEBHOOK HERE
   whatsappNumber: "27780861628"
+};
+
+// Current prices (from the Sir Kabs packages flyer).
+// If you change a price here, also change the matching option values in courses.html.
+const PRICES = {
+  code8: 6500,
+  code10: 7650,
+  learners: 800,
+  lesson: 300,
+  carHire: 500,
+  truckHire: 650
 };
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
@@ -342,10 +353,12 @@ if (heroSlider) {
 }
 
 /* ======================================================================
-   V2: BUILD-YOUR-OWN PACKAGE CALCULATOR
-   Prices come from the current Sir Kabs flyer:
-   lessons R250/hour, car hire R500, truck hire R650,
-   Code 8 R6,000 and Code 10 R7,000.
+   BUILD-YOUR-OWN PACKAGE CALCULATOR
+   Prices come from the Sir Kabs packages flyer (see PRICES above):
+   Code 8 R6,500, Code 10 R7,650, Learner's Licence R800,
+   extra lessons R300 each, car hire R500, truck hire R650.
+   Code 8 and Code 10 packages already include vehicle hire, so the
+   separate hire options are switched off when one of them is selected.
    ====================================================================== */
 const packageBuilder = $('[data-package-builder]');
 if (packageBuilder) {
@@ -356,6 +369,7 @@ if (packageBuilder) {
   const summaryText = $('#package-summary-text');
   const totalText = $('#package-total');
   const bookButton = $('#package-book-button');
+  const includedNote = $('#package-included-note');
   const vehicleInputs = $$('input[name="package_vehicle"]', packageBuilder);
 
   const money = value => `R${Number(value).toLocaleString('en-ZA')}`;
@@ -363,19 +377,29 @@ if (packageBuilder) {
   const updatePackage = () => {
     const basePrice = Number(baseSelect?.value || 0);
     const baseLabel = baseSelect?.selectedOptions?.[0]?.dataset.label || 'Lessons only';
-    const hours = Number(hoursInput?.value || 0);
-    const lessonsPrice = hours * 250;
+    const hireIncluded = basePrice === PRICES.code8 || basePrice === PRICES.code10;
+
+    // Vehicle hire is included in the full packages, so lock it out there.
+    if (hireIncluded) {
+      const none = vehicleInputs.find(input => Number(input.value) === 0);
+      if (none) none.checked = true;
+    }
+    vehicleInputs.forEach(input => { input.disabled = hireIncluded && Number(input.value) !== 0; });
+    if (includedNote) includedNote.hidden = !hireIncluded;
+
+    const lessons = Number(hoursInput?.value || 0);
+    const lessonsPrice = lessons * PRICES.lesson;
     const vehicle = vehicleInputs.find(input => input.checked);
     const vehiclePrice = Number(vehicle?.value || 0);
     const vehicleLabel = vehicle?.dataset.label || 'No vehicle hire';
     const addStudy = Boolean(studyInput?.checked);
     const total = basePrice + lessonsPrice + vehiclePrice;
 
-    if (hoursValue) hoursValue.textContent = String(hours);
+    if (hoursValue) hoursValue.textContent = String(lessons);
 
     const parts = [];
     if (basePrice > 0) parts.push(baseLabel);
-    if (hours > 0) parts.push(`${hours} extra lesson hour${hours === 1 ? '' : 's'}`);
+    if (lessons > 0) parts.push(`${lessons} extra lesson${lessons === 1 ? '' : 's'}`);
     if (vehiclePrice > 0) parts.push(vehicleLabel);
     if (addStudy) parts.push('Learner / study support (price to confirm)');
     if (!parts.length) parts.push('Custom request — details to confirm');
@@ -402,7 +426,7 @@ if (packageBuilder) {
 }
 
 /* ======================================================================
-   V2: SHOW A CUSTOM PACKAGE ON THE BOOKING PAGE
+   SHOW A CUSTOM PACKAGE ON THE BOOKING PAGE
    The package is also copied into hidden form fields so both FormSubmit
    and Make.com receive it with the booking.
    ====================================================================== */
