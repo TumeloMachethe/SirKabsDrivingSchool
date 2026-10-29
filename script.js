@@ -3,8 +3,10 @@
 SIR KABS DRIVING SCHOOL — QUICK EDIT GUIDE
 ==========================================================================
 
-1) FORMSUBMIT EMAIL
-   Update CONFIG.formSubmitEmail below if the booking email changes.
+1) BOOKING FORM (WEB3FORMS)
+   Paste your Web3Forms access key into CONFIG.web3formsKey below.
+   Get a free key at web3forms.com. Bookings are emailed to the address
+   you registered there. To change the booking email, create a new key.
 
 2) MAKE.COM WEBHOOK
    Replace PASTE_YOUR_MAKE_WEBHOOK_URL_HERE when you are ready to connect Make.
@@ -28,7 +30,7 @@ SIR KABS DRIVING SCHOOL — QUICK EDIT GUIDE
 ==========================================================================
 */
 const CONFIG = {
-  formSubmitEmail: "sirkabsdrivingschool@gmail.com",
+  web3formsKey: "82876876-5ec2-43cc-a9e2-695481b61192", // <<< WEB3FORMS: PASTE YOUR ACCESS KEY HERE
   makeWebhookUrl: "PASTE_YOUR_MAKE_WEBHOOK_URL_HERE", // <<< MAKE.COM: PASTE YOUR WEBHOOK HERE
   whatsappNumber: "27780861628"
 };
@@ -184,7 +186,7 @@ $$('.material-link').forEach(link => {
   });
 });
 
-// Booking form -> FormSubmit + Make.com
+// Booking form -> Web3Forms (+ optional Make.com)
 const bookingForm = $("#booking-form");
 const submitBtn = $("#submit-btn");
 const formStatus = $("#form-status");
@@ -221,21 +223,31 @@ async function sendToMake(payload) {
   return { sent: true };
 }
 
-async function sendToFormSubmit(formData) {
-  formData.append("_subject", "New Sir Kabs Driving School Booking");
-  formData.append("_template", "table");
-  formData.append("_captcha", "false");
+// Sends the booking to Web3Forms. Only counts as sent if Web3Forms confirms it.
+async function sendBooking(formData) {
+  if (!CONFIG.web3formsKey || CONFIG.web3formsKey.includes("PASTE_YOUR_")) {
+    throw new Error("Web3Forms access key is missing in script.js");
+  }
+
+  // Remove the spam-trap field so it is not sent along with the booking.
+  formData.delete("website");
+
+  formData.append("access_key", CONFIG.web3formsKey);
+  formData.append("subject", "New Sir Kabs Driving School Booking");
+  formData.append("from_name", "Sir Kabs Website");
   formData.append("submitted_at", new Date().toLocaleString("en-ZA", { dateStyle: "medium", timeStyle: "short" }));
 
-  const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(CONFIG.formSubmitEmail)}`;
-  const response = await fetch(endpoint, {
+  const response = await fetch("https://api.web3forms.com/submit", {
     method: "POST",
     headers: { "Accept": "application/json" },
     body: formData
   });
 
-  if (!response.ok) throw new Error("FormSubmit request failed");
-  return response.json().catch(() => ({ success: true }));
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || result.success !== true) {
+    throw new Error(result.message || `Web3Forms request failed (${response.status})`);
+  }
+  return result;
 }
 
 bookingForm?.addEventListener("submit", async event => {
@@ -263,12 +275,12 @@ bookingForm?.addEventListener("submit", async event => {
   payload.submitted_at_iso = new Date().toISOString();
 
   try {
-    const [formSubmitResult, makeResult] = await Promise.allSettled([
-      sendToFormSubmit(new FormData(bookingForm)),
+    const [bookingResult, makeResult] = await Promise.allSettled([
+      sendBooking(new FormData(bookingForm)),
       sendToMake(payload)
     ]);
 
-    if (formSubmitResult.status === "rejected") throw formSubmitResult.reason;
+    if (bookingResult.status === "rejected") throw bookingResult.reason;
     if (makeResult.status === "rejected") console.warn("Make.com webhook failed:", makeResult.reason);
 
     const selected = bookingForm.elements.service?.value || "booking";
@@ -278,7 +290,8 @@ bookingForm?.addEventListener("submit", async event => {
     window.location.href = `thank.html?service=${encodeURIComponent(selected)}`;
   } catch (error) {
     console.error(error);
-    setFormStatus("We could not send the booking online. Please try again, or use the WhatsApp button to contact Sir Kabs directly.", "error");
+    const reason = error?.message ? ` (${error.message})` : "";
+    setFormStatus(`We could not send the booking online${reason}. Please try again, or use the WhatsApp button to contact Sir Kabs directly.`, "error");
     showToast("Booking not sent — please try again or use WhatsApp.", 5000);
   } finally {
     if (submitBtn) {
@@ -427,7 +440,7 @@ if (packageBuilder) {
 
 /* ======================================================================
    SHOW A CUSTOM PACKAGE ON THE BOOKING PAGE
-   The package is also copied into hidden form fields so both FormSubmit
+   The package is also copied into hidden form fields so both Web3Forms
    and Make.com receive it with the booking.
    ====================================================================== */
 if (bookingForm) {
